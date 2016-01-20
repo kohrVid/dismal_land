@@ -1,0 +1,138 @@
+1
+The Galleries
+Dismaland boasts three large galleries which together comprise the finest collection of contemporary art ever assembled in a North Somerset seaside town.
+2
+Model Village
+Jimmy Cauty’s hand crafted miniature world will delight and amaze (and potentially cause seizures in persons sensitive to strobe lighting).
+3
+Cinderella’s Castle
+Step inside the fairytale and see how it feels to be a real princess. Souvenir photos available.
+4
+Guerilla Island
+Features a bus-mounted museum, library, gallery of guerilla art, Comrades Advice Bureau and workshops in how to hack billboards.
+5
+Ben Long
+has constructed a stallion entirely from used scaffolding.
+6
+Water Cannon Creek
+An armour plated riot control vehicle built to serve on the streets of Northern Ireland. Equipped with sniper posts, grenade launchers and now – a children’s slide.
+7
+Mini Gulf
+An oil caliphate themed crazy golf course made from the hockey pitch at Cheltenham Ladies college.
+8
+Giant Pin Wheel
+Commissioned by Banksy to power the entire site, it turns out this ecological marvel has trouble charging more than two mobile phones at once.
+9
+Kids Enclosure
+Strictly for the little ones – an area that combines soft play and loan shop.
+10
+Punch and Julie
+The infamous Julie Burchill has given this seaside staple a good kicking. Now includes references to Jimmy Saville and Fifty Shades of Grey.
+11
+Puppets
+A puppet revue show constructed entirely from the contents of Hackney skips – it’s ‘Fly Tip Theatre’ by Paul Insect and Bast. Self operated.
+12
+Jeffrey Archer Memorial Fire Pit
+Warm yourself around an authentic real open fire ceremonially lit each day by burning one of the famed local perjurer’s novels.
+13
+Portrait Artist
+Nettie Wakefield renders your likeness in an exquisite pencil drawing, but only the back of your head. Surprisingly revealing.
+14
+Picnic Area
+The humble picnic table proves a rich source of artistic ammunition for American furniture twerker Michael Beitz.
+15
+Cinema
+Truck-mounted outdoor screen playing a rolling program of short films day and night. Cushions not provided.
+16
+Circus Tent
+A gothic sculpture park in a tiny big top tent.
+17
+Amusements
+Win big prizes on hook-a-duck and the shooting gallery. Knock over an anvil in David Shrigley’s game of skill and cunning. Navigate the high seas with Banksy’s Mediterranean boat ride.
+18
+Big Rig Jig
+A masterpiece of post-industrial assemblage art – it’s two juggernauts performing ballet by Mike Ross.
+19
+Parking 
+
+20
+Security check
+Do not smile
+
+21
+Exit through the gift shop
+
+22
+Death Dance and Smiley 
+
+23
+Hallway
+
+24
+Migrant Boats
+
+25
+Toilet Paper Tables
+
+26 
+Dolphin Toilet Bowl
+
+27 
+Ferris Weel
+
+28 
+Food Area
+
+# line = gets.chomp
+# while line != nil && line[0] != "="
+#   id = line.to_i
+#   name = gets.chomp
+#   description = gets.chomp
+#   line = gets.chomp
+
+#   puts "{id: #{id}, name: \"#{name}\", description: \"#{description}\", directions: {}}, "
+# end
+
+
+
+19 -> W -- 20
+20 -> W -- 13
+13 -> S -- 22, 13 -> N -- 12, 13 -> W -- 3, 13 -> SW -- 14, 13 -> NW -- 12, 13 -> NE -- 21
+22 -> W -- 1, 22 -> N -- 13
+1 -> W -- 23, 1 -> E -- 22
+2 -> E -- 23 
+23 -> N -- 16, 23 -> E -- 1, 23 -> W -- 2
+16 -> S -- 23, 16 -> E -- 24, 16 -> N -- 18
+18 -> S -- 16, 18 -> SE -- 24, 18 -> E -- 14, 18 -> NE -- 17, 18 -> NW -- 15, 18 -> SW -- 23
+17 -> SW -- 18, 17 -> S -- 24, 17 -> E -- 14, 17 -> W -- 15
+24 -> N -- 17, 24 -> NE -- 14, 24 -> W -- 16, 24 -> NW -- 18
+14 -> SW -- 24, 14 -> SE -- 22, 14 -> NE -- 13, 14 -> NW -- 3, 14 -> W -- 17
+15 -> E -- 17, 15 -> SE -- 18, 15 -> NW -- 25
+25 -> SE -- 15, 25 -> N -- 26
+26 -> S -- 25, 26 -> N -- 4, 26 -> NE -- 27
+27 -> SW -- 26, 27 -> N -- 4, 27 -> NE -- 5
+4 -> S -- 26, 4 -> S -- 27, 4 -> SE -- 5
+5 -> NW -- 4, 5 -> SW -- 27, 5 -> NE -- 7, 5 -> E -- 6
+6 -> W -- 5, 6 -> N -- 7, 6 -> NE -- 8
+7 -> SW -- 5, 7 -> W -- 4, 7 -> E -- 8, 7 -> S -- 6
+8 -> W -- 7, 8 -> E -- 9
+9 -> W -- 8, 9 -> E -- 28, 9 -> SE -- 10
+28 -> W -- 9, 28 -> S -- 10, 28 -> SE -- 11
+10 -> N -- 28, 10 -> NW -- 9, 10 -> E -- 11, 10 -> SE -- 12
+11 -> W -- 10, 11 -> NW -- 28, 11 -> SW -- 12, 11 -> S -- 21
+12 -> N -- 10, 12 -> NE -- 11, 12 -> E -- 21, 12 -> S -- 13, 12 -> SW -- 3
+
+
+
+# line = gets
+# while line != nil && line != ""
+#   entries = line.chomp.split(", ")
+#   entries.each do |entry|
+#     parts = entry.split(" -> ")
+#     direction = parts[1].split(" -- ")
+#     locations[parts[0].to_i - 1][:directions][direction[0].downcase.to_sym] = direction[1].to_i
+#   end
+#   line = gets
+# end
+
+# puts locations.inspect
