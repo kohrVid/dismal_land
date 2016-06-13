@@ -24,7 +24,7 @@ locations = [{:id=>1, :name=>"The Galleries", :description=>"Dismaland boasts th
   {:id=>24, :name=>"Migrant Boats", :description=>"Navigate the high seas with Banksy's Mediterranean boat ride.", :directions=>{:n=>17, :ne=>14, :w=>16, :nw=>18}},
   {:id=>25, :name=>"Toilet Paper Tables", :description=>"", :directions=>{:se=>15, :n=>26}},
   {:id=>26, :name=>"Dolphin Toilet Bowl", :description=>"", :directions=>{:s=>25, :n=>4, :ne=>27}},
-  {:id=>27, :name=>"Ferris Weel", :description=>"", :directions=>{:sw=>26, :n=>4, :ne=>5}},
+  {:id=>27, :name=>"Ferris Weel", :description=>"Staff operating this ride tell patrons, &quot;No sweets in line!&quot; and a very dry, &quot;Have. Fun.&quot;", :directions=>{:sw=>26, :n=>4, :ne=>5}},
   {:id=>28, :name=>"Food Area", :description=>"", :directions=>{:w=>9, :s=>10, :se=>11}}]
 
 puts "You've arrived at Dismaland!"
