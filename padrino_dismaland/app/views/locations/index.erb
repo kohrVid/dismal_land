@@ -1,0 +1,28 @@
+<script>
+  var locations = <%= @locations_and_directions.to_json.html_safe %>;
+</script>
+<script src="/javascripts/locations_index.js"></script>
+<h2 id="locName"></h2>
+
+<div class="row">
+  <div class="columns">
+    <img id="locPic"><br>
+    <div id="locDesc"></div>
+  </div>
+  <div class="columns">
+    <div id="directionLinks"></div>
+  </div>
+</div>
+<!--input type="number" onchange="showLocation(this.value);"-->
+<div class="row">
+  <div>
+    <h3>Post a new comment:</h3>
+    <strong>Name:</strong>  <input type="text" id="commentAuthor" name="comment[author]"><br>
+    <strong>Message:</strong><br> <textarea type="text" id="commentBody" name="comment[body]"></textarea><br>
+    <input type="hidden" name="comment[location_id]" id="commentLocationId" value="">
+    <%= csrf_token_field %>
+    <input type="button" id="commentSubmitForm" class="button" value="What did you think?">
+
+    <div id="commentsIndex"></div>
+  </div>
+</div>

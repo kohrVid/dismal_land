@@ -1,0 +1,92 @@
+body {
+  overflow-x: hidden;
+  font-family: "sans";
+  background: url("/images/bg.jpg") no-repeat;
+  background-position: 0% 16%;
+  background-attachment: fixed;
+}
+
+header img {
+  margin: auto auto -17px auto;
+  text-align: center;
+  display: block;
+}
+
+nav {
+  background-color: #111;
+  color: #fff;
+  position: relative;
+  top: 0px;
+  width: 120%;
+  line-height: 2rem;
+  margin: -10 0 0 0;
+  z-index: 10000;
+  padding:0;
+}
+
+nav a:link, nav a:visited, nav a:hover, nav a:active { 
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff !important;
+}
+
+.nav {
+  display: inline; 
+}
+
+.no-bullet { 
+  list-style-type: none;
+}
+
+.button {
+  background-color: #111;
+  color: #fff;
+  font-weight: bold;
+  line-height: 2rem;
+}
+
+h2 {
+  padding: 0 3rem;
+}
+.row {
+  padding: 0 3rem;
+  margin:0 auto;
+  width: 100%;
+  display: table;
+}
+
+.row > div {
+  display: table-cell;
+}
+
+.columns {
+  width: 40%;
+  position: relative;
+/*  height: 230px;*/
+}
+#directionLinks {
+  /*
+  margin-bottom: -200px;
+  bottom: 80px;
+  position: relative;*/
+  display: inline-block;
+  padding: 0px;
+  vertical-align: bottom;
+ /* height: 200px;*/
+}
+
+#locPic {
+  text-align: right;
+}
+
+#locDesc {
+  width: 50%;
+}
+
+.commentBody {
+  padding: 0.2rem 0;
+}
+
+.commentText {
+  padding: 2rem 0 0 0;
+}

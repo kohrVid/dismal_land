@@ -1,0 +1,15 @@
+<img src = "images/picnic_area.gif"><br>
+<span id="title">crapola</span><br>
+<span id="descrip">xyzabc</span><br>
+
+<script>
+  function runHelloWorld() {
+    //Only rewrite the inside of the SPAN (the inner HTML stuff inside)
+    document.getElementById("title").innerHTML = "hello world";
+    var myImage = document.createElement("img");
+    myImage.src="images/food_area.gif";
+    document.getElementById("descrip").appenedChild(myImage);
+  }
+</script>
+
+<input type="button" onclick-"runHelloWorld();" value="click me:)">
