@@ -20,6 +20,7 @@
     <strong>Name:</strong>  <input type="text" id="commentAuthor" name="comment[author]"><br>
     <strong>Message:</strong><br> <textarea type="text" id="commentBody" name="comment[body]"></textarea><br>
     <input type="hidden" name="comment[location_id]" id="commentLocationId" value="">
+    <input type="hidden" name="comment[id]" id="commentId" value="">
     <%= csrf_token_field %>
     <input type="button" id="commentSubmitForm" class="button" value="What did you think?">
 

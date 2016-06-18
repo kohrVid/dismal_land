@@ -1,0 +1,40 @@
+<!doctype>
+<html>
+  <head>
+    <title></title>
+    <script>
+      window.addEventListener("load", function() {
+	var myButtons = document.getElementById("buttons");
+	var myBuffer = document.getElementById("txtBuffer");
+	for (var i = 0; i < 10; ++i) {
+	  var myButton = document.createElement("input");
+	  myButton.type = "button";
+	  myButton.value = i;
+	  
+	  //With a cloure
+	  myButton.addEventListener("click", function (num) {
+	    return function (clickedDiv) { 
+	      myBuffer.innerHTML += num.toString();
+	    }; 
+	  } (i));
+	  
+	  /*
+	  //With a data piece
+	    //Note: JS devs don't think this is best practice
+	  myButton.setAttribute("data-num", i.toString());
+	  myButton.addEventListener("click", function() {
+	    myBuffer.innerHTML += this.getAttribute("data-num");
+	  });
+	 */
+	 //=============================
+	 
+	  myButtons.appendChild(myButton);
+	}
+      });
+    </script>
+  </head>
+  <body>
+    <span id="txtBuffer"></span><br>
+    <div id="buttons"></div>
+  </body>
+</html>

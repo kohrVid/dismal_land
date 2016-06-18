@@ -20,6 +20,7 @@ gem 'rake'
 gem 'erubis', '~> 2.7.0'
 gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'sqlite3'
+gem "pry"
 
 # Test requirements
 gem 'rspec', :group => 'test'

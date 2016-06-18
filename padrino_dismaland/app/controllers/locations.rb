@@ -3,26 +3,6 @@ PadrinoDismaland::App.controllers :locations do
     @location = Location.find(params[:id])
   end
   
-#  set :views, layout: "application"
-  # get :index, :map => '/foo/bar' do
-  #   session[:foo] = 'bar'
-  #   render 'index'
-  # end
-
-  # get :sample, :map => '/sample/url', :provides => [:any, :js] do
-  #   case content_type
-  #     when :js then ...
-  #     else ...
-  # end
-
-  # get :foo, :with => :id do
-  #   "Maps to url '/foo/#{params[:id]}'"
-  # end
-
-  # get '/example' do
-  #   'Hello world!'
-  # end
-  
   get :root, map: "/" do
     #@location = Location.find(19)
     #Info about all direction we can go from this location
@@ -38,8 +18,9 @@ PadrinoDismaland::App.controllers :locations do
 	  { author: comment.author, 
 	    body: comment.body, 
 	    location_id: comment.location_id,
-	    created_at: comment.created_at.strftime("%H:%M on %d %B %Y"), 
-	    updated_at: comment.updated_at.strftime("%H:%M on %d %B %Y") }
+	    id: comment.id,
+	    created_at: comment.created_at,#.strftime("%H:%M on %d %B %Y"), 
+	    updated_at: comment.updated_at}#.strftime("%H:%M on %d %B %Y") }
 	end
       }
      # @comments = Comment.order("created_at DESC")

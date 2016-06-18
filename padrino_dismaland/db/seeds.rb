@@ -1,3 +1,8 @@
+Tag.destroy_all
+Comment.destroy_all
+Direction.destroy_all
+Location.destroy_all
+
 locations = [{:id=>1, :name=>"The Galleries", :description=>"Dismaland boasts three large galleries which together comprise the finest collection of contemporary art ever assembled in a North Somerset seaside town.", :directions=>{:w=>23, :e=>22}},
   {:id=>2, :name=>"Model Village", :description=>"Jimmy Cauty's hand crafted miniature world will delight and amaze (and potentially cause seizures in persons sensitive to strobe lighting).", :directions=>{:e=>23}},
   {:id=>3, :name=>"Cinderella's Castle", :description=>"Step inside the fairytale and see how it feels to be a real princess. Souvenir photos available.", :directions=>{:w=>25}},
@@ -24,12 +29,14 @@ locations = [{:id=>1, :name=>"The Galleries", :description=>"Dismaland boasts th
   {:id=>24, :name=>"Migrant Boats", :description=>"Navigate the high seas with Banksy's Mediterranean boat ride.", :directions=>{:n=>17, :ne=>14, :w=>16, :nw=>18}},
   {:id=>25, :name=>"Toilet Paper Tables", :description=>"", :directions=>{:se=>15, :n=>26}},
   {:id=>26, :name=>"Dolphin Toilet Bowl", :description=>"", :directions=>{:s=>25, :n=>4, :ne=>27}},
-  {:id=>27, :name=>"Ferris Weel", :description=>"Staff operating this ride tell patrons, &quot;No sweets in line!&quot; and a very dry, &quot;Have. Fun.&quot;", :directions=>{:sw=>26, :n=>4, :ne=>5}},
+  {:id=>27, :name=>"Ferris Wheel", :description=>"Staff operating this ride tell patrons, &quot;No sweets in line!&quot; and a very dry, &quot;Have. Fun.&quot;", :directions=>{:sw=>26, :n=>4, :ne=>5}},
   {:id=>28, :name=>"Food Area", :description=>"", :directions=>{:w=>9, :s=>10, :se=>11}}]
 
 locations.each do|loc| 
-                new_loc = Location.create(id: loc[:id], name: loc[:name], description: loc[:description]);
-                loc[:directions].each do |k,v| 
-                        Direction.create(location_id: new_loc.id, destination_id: v, direction: k)
-                end
-        end
+  new_loc = Location.create(id: loc[:id], name: loc[:name], description: loc[:description])
+  loc[:directions].each do |k,v| 
+    Direction.create(location_id: new_loc.id, destination_id: v, direction: k)
+  end
+end
+
+%w(immigration politics money food rides).each { |name| Tag.create(name: name) }
