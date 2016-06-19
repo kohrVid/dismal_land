@@ -21,9 +21,23 @@ PadrinoDismaland::App.controllers :locations do
 	    id: comment.id,
 	    created_at: comment.created_at,#.strftime("%H:%M on %d %B %Y"), 
 	    updated_at: comment.updated_at}#.strftime("%H:%M on %d %B %Y") }
+	end,
+	tags: loc.tags.order("name DESC").map do |tag|
+	  { id: tag.id, name: tag.name, locations: tag.locations }
 	end
       }
      # @comments = Comment.order("created_at DESC")
+    end
+    @tags_and_locations = Tag.all.map do |tag| 
+      { id: tag.id, name: tag.name,
+        locations: tag.locations.map do |location|
+	  { name: location.name, id: location.id }
+	end,
+        location_tags: tag.location_tags.map do |location_tag|
+	  { location_id: location_tag.location_id,
+	    tag_id: location_tag.tag_id }
+	end
+      }
     end
     render "/locations/index"
   end

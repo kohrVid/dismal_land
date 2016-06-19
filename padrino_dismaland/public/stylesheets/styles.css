@@ -19,7 +19,7 @@ nav {
   top: 0px;
   width: 120%;
   line-height: 2rem;
-  margin: -10 0 0 0;
+  margin: -10px 0 0 0;
   z-index: 10000;
   padding:0;
 }
@@ -32,6 +32,28 @@ nav a:link, nav a:visited, nav a:hover, nav a:active {
 
 .nav {
   display: inline; 
+}
+
+footer {
+  background-color: #111;
+  color: #fff;
+  position: relative;
+  bottom: 0px;
+  width: 120%;
+  line-height: 2rem;
+  margin: 50px 0 0 0;
+  z-index: 10000;
+  padding:0;
+}
+
+footer a:link, footer a:visited, footer a:hover, footer a:active { 
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff !important;
+}
+
+.nav {
+ /* display: inline; */
 }
 
 .no-bullet { 
@@ -89,4 +111,16 @@ h2 {
 
 .commentText {
   padding: 2rem 0 0 0;
+}
+
+#tagcloud {
+  width: 100%;
+  word-break: break-word;
+}
+
+#tagcloud a:link, #tagcloud a:visited, #tagcloud a:hover, #tagcloud a:active { 
+/*  text-decoration: none;*/
+  font-weight: bold;
+  color: #000 !important;
+  padding: 0.2rem;
 }

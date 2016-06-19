@@ -1,0 +1,24 @@
+<script>
+  var tags = <%= @tags_and_locations.to_json.html_safe %>;
+  for (var i in tags) {
+    var tag_size = tags[i].locations.length + "rem";
+    var tag_link = $("<a href='/tags/" + tags[i].id + "'>" + tags[i].name + "</a>");
+   // $(tag_link).css("font-size", tag_size+"rem");
+    $("#tagcloud").prepend(tag_link);
+    //$("#taglist").css("line-height", tag_size);
+    console.log(tag_link);
+  }
+</script>
+
+<div id="tagcloud">
+</div>
+
+<%# @tags.each do |tag| %>
+  <!--p>
+  <strong><a href="/tags/<%#=tag.id%>"><%#= tag.name %></a></strong><br>
+    <%# tag.locations.each do |location| %>
+      <%#= location.name %><br>
+    <%# end %>
+  </p-->
+<%# end %>
+

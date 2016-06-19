@@ -1,12 +1,12 @@
+<link rel="stylesheet" href="/stylesheets/styles_old.css">
 <h3><%= @location.name %></h3>
 <%= @location.description %>
 <div class="container">
-  <div id="subContainer">
-  
 <% @location.directions.each do |direction| %>
-  <div id="<%= direction.direction %>"><a href="/locations/<%= direction.destination.id %>"><%= direction.get_direction_name %></a></div>
+  <div id="<%= direction.direction %>"><a class="button" href="/locations/<%= direction.destination.id %>"><%= direction.get_direction_name %></a></div>
 <% end %>
-  
+<div class="container">
+  <div id="subContainer">
     <img src="<%= @location.get_image%>">
   </div>
 </div>
@@ -15,5 +15,5 @@
   <input type="text" name="comment[author]"><br>
   <textarea type="text" name="comment[body]"></textarea><br>
   <input type="hidden" name="comment[location_id]" value="<%= @location.id %>">
-  <input type="submit" name="">
+  <input type="submit" class="button" name="">
 </form>

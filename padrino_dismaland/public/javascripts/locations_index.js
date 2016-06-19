@@ -7,7 +7,7 @@ window.onload = function() {
   authenticityToken = $("input[name=authenticity_token]").attr("value");
   //Show the first location
   showLocation(curLoc);
-    //================Create==============================
+   //================Create==============================
   $("#commentSubmitForm").click(function () {
     $.post("/comments", 
 	{
@@ -26,9 +26,9 @@ window.onload = function() {
 	}
       );
   });
-//  showLocation(curLoc);
 };
 function showLocation(locNum) {
+
   //========================Navigation button================================
   var loc = locations[locNum - 1];
   $("#locName").html(loc.name);
@@ -61,6 +61,16 @@ function showLocation(locNum) {
     var comment = loc.comments[i];
     commentDiv.append(buildComment(comment));
   }
+
+//==================Tag Cloud===================
+//  var tags = loc.tags;
+  console.log(tags);
+  for (var i in tags) {
+    var tag_size = (tags[i].locations.length/1.5) + "rem";
+    var tag_link = $('<span><a style="font-size:'+tag_size+';" href="/tags/' + tags[i].id + '">' + tags[i].name + '</a></span>');
+    $("#tagcloud").prepend(tag_link);
+    console.log(tag_link);
+  } 
 }
 
 //========================List Comments in Divs======
@@ -80,11 +90,8 @@ var buildComment = function(comment) {
   //=============================Updating======================
   newComment.find(".commentBody").on("click", function() {
     currentlyEditing = $(this);
-//    var currentBody = currentlyEditing;
     var newBody = $('<textarea id="editBody">' + currentlyEditing.html() + '</textarea>');
     currentlyEditing.replaceWith(newBody);
-  //  var currentAuthor = newComment.find(".commentAuthor");
-   // currentAuthor.replaceWith('<input id="editAuthor">').val(currentAuthor);
     newBody.on("keypress", function () {
       if (event.keyCode === 13){
 	$.post("/comments/" + parseInt(newComment.attr("data-id")),
@@ -92,11 +99,7 @@ var buildComment = function(comment) {
 	   _method: "put", authenticity_token: authenticityToken },
 	  function (response) {
 	    var myLoc = locations[curLoc - 1];
-	    //$("#commentsIndex").empty();
-/*	    myLoc.comments = myLoc.comments.filter(  function(c){
-	      return c.id != response.id;
-	    });*/
-	$("#commentsIndex").find(newComment).replaceWith(buildComment(response));
+	    $("#commentsIndex").find(newComment).replaceWith(buildComment(response));
 	  });
 	 console.log("Submit");
        }
@@ -109,16 +112,17 @@ var buildComment = function(comment) {
       { _method: "delete", authenticity_token: authenticityToken },
       function (response) {
 	var myLoc = locations[curLoc - 1];
-	commentDiv.empty();
 	myLoc.comments = myLoc.comments.filter(  function(c){
 	  return c.id != response.id;
 	});
-	$("#commentsIndex").prepend(buildComment(response));
+	$("#commentsIndex").find(newComment).replaceWith(myLoc.comments);
       });
       console.log("I destroyed it!!!");
     });
     newComment.append(destroyButton);
     return newComment;
+
+
 }
 
 
