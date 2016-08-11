@@ -13,7 +13,7 @@ window.onload = function() {
       {
 	"comment[author]": $("#commentAuthor").val(),
 	"comment[body]": $("#commentBody").val(),
-	"comment[location_id]": curLoc,//$("#commentLocationId").val(),
+	"comment[location_id]": curLoc,
 	authenticity_token: authenticityToken
       },
       //The response function is a callback
@@ -26,6 +26,23 @@ window.onload = function() {
       }
     );
   });
+  $("#tagSubmitForm").click(function () {
+    $.post("/tags", 
+      {
+	"tag[name]": $("#tagName").val(),
+	"location[id]": curLoc,
+	authenticity_token: authenticityToken
+      }/*,
+      //The response function is a callback
+      function (response) {
+	if (typeof (response) == "string"){
+	  response = JSON.parse(response);
+	}
+	location[curLoc - 1].tags.unshift(response);
+	$("#locationTags ul").prepend(buildComment(response));
+      }*/
+    );
+  });
 };
 
 function showLocation(locNum) {
@@ -33,6 +50,8 @@ function showLocation(locNum) {
   $("#tagLocations ul").empty();
   $("#left").show();
   $("#comments").show();
+
+
   //========================Navigation button================================
   var loc = locations[locNum - 1];
   $("#locName").html(loc.name);
@@ -66,15 +85,25 @@ function showLocation(locNum) {
     commentDiv.append(buildComment(comment));
   }
 
-//==================Tag Cloud===================
-var addTag = function(tag) {
-}
+  //=========Location Tags===================
+  var localTags = loc.tags;
+  $("#locationTags ul").empty();
+  for (var i = 0; i < localTags.length; i++) {
+    var currentTag = localTags[i];
+    var tagLi = $("<li>");
+    $(tagLi).append('<a href="#">' + currentTag.name + '</a>');
+    $("#locationTags ul").append(tagLi);
+  }
 
-  $("#tagcloud").empty();
+  //==================Tag Cloud===================
+  var addTag = function(tag) {
+  }
+
+  $("#tagCloud").empty();
   for (var i = 0; i < tags.length; i++) {
     var tag_size = (tags[i].locations.length/1.5) + "rem";
     var tag_link = $('<a style="font-size:'+tag_size+';" href="#" id="' + tags[i].id + '">' + tags[i].name + '</a>');
-    $("#tagcloud").append(tag_link);
+    $("#tagCloud").append(tag_link);
     var tagId = "#" + tags[i].id;
     $(tagId).on("click", function(obj) {
      return function () {
@@ -85,7 +114,6 @@ var addTag = function(tag) {
     
   } 
 
-var addTag = function(tag) {
 }
 
 //========================List Comments in Divs======
@@ -139,8 +167,6 @@ var buildComment = function(comment) {
     newComment.append(destroyButton);
     return newComment;
   }
-}
-
 
 //=========================Show Tags============================
 function showTag(tag) {
@@ -150,10 +176,11 @@ function showTag(tag) {
   $("#left").hide();
   $("#comments").hide();
   $("#directionLinks").empty();
+  $("#locationTags ul").empty();
   for (var i = 0; i < locations.length; i++) {
-    var loc = locations[i]
+    var loc = locations[i];
     var icon = $("<img>").attr("src", "/images/" + loc.name.toLowerCase().replace(/ /g, "_") + ".gif");
-    var locDiv = $("<li>")
+    var locDiv = $("<li>");
     $(locDiv).append("<strong>" + loc.name + "</strong>");
     $(locDiv).append("<p>");
     $(locDiv).append(icon);
