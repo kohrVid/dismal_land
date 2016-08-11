@@ -28,7 +28,7 @@ PadrinoDismaland::App.controllers :locations do
       }
      # @comments = Comment.order("created_at DESC")
     end
-    @tags_and_locations = Tag.all.map do |tag| 
+    @tags_and_locations = Tag.all.order("name ASC").map do |tag| 
       { id: tag.id, name: tag.name,
         locations: tag.locations.map do |location|
 	  { name: location.name, id: location.id }

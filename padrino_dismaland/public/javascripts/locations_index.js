@@ -10,25 +10,29 @@ window.onload = function() {
    //================Create==============================
   $("#commentSubmitForm").click(function () {
     $.post("/comments", 
-	{
-	  "comment[author]": $("#commentAuthor").val(),
-	  "comment[body]": $("#commentBody").val(),
-	  "comment[location_id]": curLoc,//$("#commentLocationId").val(),
-	  authenticity_token: authenticityToken
-	},
-	//The response function is a callback
-	function (response) {
-	  if (typeof (response) == "string"){
-	    response = JSON.parse(response);
-	  }
-	  locations[curLoc - 1].comments.unshift(response);
-	  $("#commentsIndex").prepend(buildComment(response));
+      {
+	"comment[author]": $("#commentAuthor").val(),
+	"comment[body]": $("#commentBody").val(),
+	"comment[location_id]": curLoc,//$("#commentLocationId").val(),
+	authenticity_token: authenticityToken
+      },
+      //The response function is a callback
+      function (response) {
+	if (typeof (response) == "string"){
+	  response = JSON.parse(response);
 	}
-      );
+	locations[curLoc - 1].comments.unshift(response);
+	$("#commentsIndex").prepend(buildComment(response));
+      }
+    );
   });
 };
-function showLocation(locNum) {
 
+function showLocation(locNum) {
+  $("#tagLocations").hide();
+  $("#tagLocations ul").empty();
+  $("#left").show();
+  $("#comments").show();
   //========================Navigation button================================
   var loc = locations[locNum - 1];
   $("#locName").html(loc.name);
@@ -46,13 +50,13 @@ function showLocation(locNum) {
     myButton.attr("value", direction.direction + " --> " + locations[direction.destination_id - 1].name);
     myButton.on("click",
       function(cool_id) {
-     return function () {
-	showLocation(cool_id);
-      };
-    } (direction.destination_id)
-  );
-  myDiv.append(myButton);
-  myDiv.append($("<br>"));
+       return function () {
+	  showLocation(cool_id);
+	};
+      } (direction.destination_id)
+    );
+    myDiv.append(myButton);
+    myDiv.append($("<br>"));
   }
   curLoc = locNum;
   var commentDiv = $("#commentsIndex");
@@ -63,14 +67,25 @@ function showLocation(locNum) {
   }
 
 //==================Tag Cloud===================
-//  var tags = loc.tags;
-  console.log(tags);
-  for (var i in tags) {
+var addTag = function(tag) {
+}
+
+  $("#tagcloud").empty();
+  for (var i = 0; i < tags.length; i++) {
     var tag_size = (tags[i].locations.length/1.5) + "rem";
-    var tag_link = $('<span><a style="font-size:'+tag_size+';" href="/tags/' + tags[i].id + '">' + tags[i].name + '</a></span>');
-    $("#tagcloud").prepend(tag_link);
-    console.log(tag_link);
+    var tag_link = $('<a style="font-size:'+tag_size+';" href="#" id="' + tags[i].id + '">' + tags[i].name + '</a>');
+    $("#tagcloud").append(tag_link);
+    var tagId = "#" + tags[i].id;
+    $(tagId).on("click", function(obj) {
+     return function () {
+	showTag(obj);
+      };
+    } (tags[i])
+    );
+    
   } 
+
+var addTag = function(tag) {
 }
 
 //========================List Comments in Divs======
@@ -95,8 +110,10 @@ var buildComment = function(comment) {
     newBody.on("keypress", function () {
       if (event.keyCode === 13){
 	$.post("/comments/" + parseInt(newComment.attr("data-id")),
-	  {"comment[body]": newBody.val(),
-	   _method: "put", authenticity_token: authenticityToken },
+	  { 
+	    "comment[body]": newBody.val(),
+	    _method: "put", authenticity_token: authenticityToken
+	  },
 	  function (response) {
 	    var myLoc = locations[curLoc - 1];
 	    $("#commentsIndex").find(newComment).replaceWith(buildComment(response));
@@ -112,7 +129,7 @@ var buildComment = function(comment) {
       { _method: "delete", authenticity_token: authenticityToken },
       function (response) {
 	var myLoc = locations[curLoc - 1];
-	myLoc.comments = myLoc.comments.filter(  function(c){
+	myLoc.comments = myLoc.comments.filter(function(c){
 	  return c.id != response.id;
 	});
 	$("#commentsIndex").find(newComment).replaceWith(myLoc.comments);
@@ -121,9 +138,34 @@ var buildComment = function(comment) {
     });
     newComment.append(destroyButton);
     return newComment;
-
-
+  }
 }
 
 
+//=========================Show Tags============================
+function showTag(tag) {
+  var locations = tag.locations;
+  $("#tagLocations").show();
+  $("#tagLocations ul").empty();
+  $("#left").hide();
+  $("#comments").hide();
+  $("#directionLinks").empty();
+  for (var i = 0; i < locations.length; i++) {
+    var loc = locations[i]
+    var icon = $("<img>").attr("src", "/images/" + loc.name.toLowerCase().replace(/ /g, "_") + ".gif");
+    var locDiv = $("<li>")
+    $(locDiv).append("<strong>" + loc.name + "</strong>");
+    $(locDiv).append("<p>");
+    $(locDiv).append(icon);
+    $(locDiv).append("</p>");
+    $("#tagLocations ul").append(locDiv);
+    locDiv.on("click",
+      function(locationId) {
+       return function () {
+	  showLocation(locationId);
+	};
+      } (loc.id)
+    );
+  }
+}
 

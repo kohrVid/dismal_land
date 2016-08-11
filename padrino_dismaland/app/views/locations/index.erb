@@ -3,20 +3,28 @@
   var tags = <%= @tags_and_locations.to_json.html_safe %>;
 </script>
 <script src="/javascripts/locations_index.js"></script>
-<h2 id="locName"></h2>
 
 <div class="row">
-  <div class="columns">
+  <div class="columns hidden" id="tagLocations">
+    <ul class="no-bullet"></ul>
+  </div>
+  <div class="columns" id="left">
+    <h2 id="locName"></h2>
     <img id="locPic"><br>
     <div id="locDesc"></div>
   </div>
   <div class="columns">
     <div id="directionLinks"></div>
+    <div id="locationTags"></div>
+    <div id="tagForm">
+      <input type="hidden" name="tag[id]" value="tag[id]"><br>
+      <input type="text" name="tag[name]" value="">
+    </div>
   </div>
 </div>
 <!--input type="number" onchange="showLocation(this.value);"-->
 <div class="row">
-  <div class="columns">
+  <div class="columns" id="bottom">
     <h3>Post a new comment:</h3>
     <strong>Name:</strong>  <input type="text" id="commentAuthor" name="comment[author]"><br>
     <strong>Message:</strong><br> <textarea type="text" id="commentBody" name="comment[body]"></textarea><br>

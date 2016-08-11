@@ -114,7 +114,7 @@ h2 {
 }
 
 #tagcloud {
-  width: 100%;
+  width: 60%;
   word-break: break-word;
 }
 
@@ -123,4 +123,8 @@ h2 {
   font-weight: bold;
   color: #000 !important;
   padding: 0.2rem;
+}
+
+.hidden {
+  display: none;
 }
