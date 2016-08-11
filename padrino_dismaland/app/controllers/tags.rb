@@ -5,13 +5,16 @@ PadrinoDismaland::App.controllers :tags do
   
   get :index, map: "/tags" do
     @tags_and_locations = Tag.all.map do |tag| 
-      { id: tag.id, name: tag.name,
+      { 
+	id: tag.id, name: tag.name,
         locations: tag.locations.map do |location|
 	  { name: location.name, id: location.id }
 	end,
         location_tags: tag.location_tags.map do |location_tag|
-	  { location_id: location_tag.location_id,
-	    tag_id: location_tag.tag_id }
+	  { 
+	    location_id: location_tag.location_id,
+	    tag_id: location_tag.tag_id
+	  }
 	end
       }
     end
@@ -20,12 +23,11 @@ PadrinoDismaland::App.controllers :tags do
   end
 
   get :new, map: "/tags/new" do
-    @tagations = Location.all
+    @tag = Tag.new
     render "/tags/new"
   end
 
   get :edit, map: "/tags/:id/edit" do
-    @tagations = Location.all
     render "/tags/edit"
   end
 
@@ -35,13 +37,14 @@ PadrinoDismaland::App.controllers :tags do
 
   post :create, map: "/tags" do
     tag = Tag.create(params[:tag][:name])
-    tag.locations << Location.find(params[:location_attributes][:id])
-    redirect "/tags"
+    tag.locations << Location.find(params[:location_id])
+    response.headers["Content-type"] = "application/json"
+    tag.to_json
   end
 
   put :update, map: "/tags/:id" do
     @tag.update(params[:tag])
-    @tag.locations << Location.find(params[:location_attributes][:id])
+    @tag.locations << Location.find(params[:location])
     redirect "/tags/#{@tag.id}"
   end
 

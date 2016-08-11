@@ -15,16 +15,22 @@
   </div>
   <div class="columns">
     <div id="directionLinks"></div>
-    <div id="locationTags"></div>
+    <div id="locationTags">
+      <strong>Tags:</strong>
+      <ul class="inline no-bullet">
+      </ul>
+    </div>
     <div id="tagForm">
-      <input type="hidden" name="tag[id]" value="tag[id]"><br>
-      <input type="text" name="tag[name]" value="">
+      <!--input type="hidden" name="tag[id]" id="tagId" value="<%# @tag.id %>"-->
+      <%= csrf_token_field %>
+      <input type="text" name="tag[name]" value="" id="tagName">
+      <input type="button" id="tagSubmitForm" class="button" value="Add a new tag">
     </div>
   </div>
 </div>
 <!--input type="number" onchange="showLocation(this.value);"-->
 <div class="row">
-  <div class="columns" id="bottom">
+  <div class="columns" id="comments">
     <h3>Post a new comment:</h3>
     <strong>Name:</strong>  <input type="text" id="commentAuthor" name="comment[author]"><br>
     <strong>Message:</strong><br> <textarea type="text" id="commentBody" name="comment[body]"></textarea><br>
@@ -36,6 +42,8 @@
     <div id="commentsIndex"></div>
   </div>
   <div class="columns">
-    <div id="tagcloud"></div>
+    <div id="tagCloud">
+      <ul></ul>
+    </div>
   </div>
 </div>

@@ -30,7 +30,7 @@ nav a:link, nav a:visited, nav a:hover, nav a:active {
   color: #fff !important;
 }
 
-.nav {
+.inline {
   display: inline; 
 }
 
@@ -113,13 +113,18 @@ h2 {
   padding: 2rem 0 0 0;
 }
 
-#tagcloud {
+#tagCloud {
   width: 60%;
   word-break: break-word;
 }
 
-#tagcloud a:link, #tagcloud a:visited, #tagcloud a:hover, #tagcloud a:active { 
-/*  text-decoration: none;*/
+#tagCloud a:link, #tagCloud a:visited, #tagCloud a:hover, #tagCloud a:active { 
+  font-weight: bold;
+  color: #000 !important;
+  padding: 0.2rem;
+}
+
+#locationTags a:link, #locationTags a:visited, #locationTags a:hover, #locationTags a:active { 
   font-weight: bold;
   color: #000 !important;
   padding: 0.2rem;

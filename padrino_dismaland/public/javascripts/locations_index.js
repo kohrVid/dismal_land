@@ -3,11 +3,11 @@ var curLoc = 19;
 var authenticityToken;
 var currentlyEditing = null;
 window.onload = function() {
-  //csrf token below:
-  authenticityToken = $("input[name=authenticity_token]").attr("value");
   //Show the first location
   showLocation(curLoc);
    //================Create==============================
+  //csrf token below:
+  authenticityToken = $("#comments").find("input[name=authenticity_token]").attr("value");
   $("#commentSubmitForm").click(function () {
     $.post("/comments", 
       {
@@ -27,10 +27,12 @@ window.onload = function() {
     );
   });
   $("#tagSubmitForm").click(function () {
+    //csrf token below:
+    authenticityToken = $("#tagForm").find("input[name=authenticity_token]").attr("value");
     $.post("/tags", 
       {
 	"tag[name]": $("#tagName").val(),
-	"location[id]": curLoc,
+	//"tag[locations][0][id]": curLoc,
 	authenticity_token: authenticityToken
       }/*,
       //The response function is a callback
